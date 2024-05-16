@@ -1,0 +1,52 @@
+Edit / Delete
+
+Contacts --+
+Contacts --+
+Clients --+
+contracts type --
+Contracts --+
+client status --
+business types --
+Bank --
+holiday --
+invoice status --
+payment types -- 
+Projects --
+Properties --
+projects status -- 
+suppliers type --
+unit type --
+users --
+user Roles --
+latters --
+latters template --
+order status --
+quotations status --
+
+
+View/Add/Edit/Delete
+
+Project Tracking --
+Staff Projects --
+Task List --
+Modules --
+Settings --
+List of attendees --
+Unit Prototype	--
+
+
+View/Edit
+
+Company Target --
+Erp Details --
+Team Target --
+Bank Payments --
+
+View/delete
+Booking List --
+
+6147
+
+
+
+

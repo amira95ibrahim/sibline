@@ -1,0 +1,199 @@
+models:
+
+  Partner:
+    email: string unique
+    name: string nullable
+    phone: string unique
+    mobile: string unique
+    website: string nullable
+    image: text nullable
+    address_id: id foreign:addresses nullable
+    is_verified: enum:0,1
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: PartnerContact,Broker
+      belongsTo: Address
+
+  PartnerContact:
+    email: string unique
+    password: string 
+    name: string nullable
+    position: string nullable
+    phone: string unique
+    mobile: string unique
+    partner_id: id foreign:partners nullable
+    relationships:
+      belongsTo: Partner
+
+  Customer:
+    email: string unique
+    password: string 
+    first_name: string nullable
+    last_name: string nullable
+    birth_date: date nullable
+    phone: string unique
+    mobile: string unique
+    address_id: id foreign:addresses nullable
+    occupation_id: id foreign:occupations nullable
+    passport_number: string unique
+    passport_photo: string nullable
+    image: text nullable
+    uuid: string unique nullable
+    platform: string nullable
+    version: string nullable
+    is_verified: enum:0,1
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      belongsTo: Address,Occupation
+
+  Broker:
+    email: string unique
+    password: string 
+    name: string nullable
+    phone: string unique
+    mobile: string unique
+    address_id: id foreign:addresses nullable
+    image: text nullable
+    is_verified: enum:0,1
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      belongsToMany: Partner
+      belongsTo: Address
+
+  Address:
+    address: string nullable
+    country_id: id foreign:countries nullable
+    city_id: id foreign:countries nullable 
+    area_id: id foreign:countries nullable
+    gps: string nullable
+    street: string nullable
+    zip_code: string nullable
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Broker,Customer,Partner
+      belongsTo: Country
+
+  Occupation:
+    name: string nullable
+    arabic_name: string nullable
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Customer
+
+  Country:
+    parent_id: id foreign:countries nullable
+    name: string nullable
+    arabic_name: string nullable
+    status: enum:0,1
+    timestamps: true
+    softDeletes: true
+    relationships:
+      hasMany: Address
+
+controllers:
+  Partner:
+    index:
+      query: all
+      render: admin.partner.index with:partners
+    create:
+      render: admin.partner.create
+    edit:
+      render: admin.partner.edit
+    show:
+      render: admin.partner.show with:show
+    store:
+      validate: email, phone, mobile, name, image
+      save: partner
+      redirect: admin.partner.index
+    update:
+      validate: email, phone, mobile, name, image
+      update: partner
+      redirect: admin.partner.index
+
+  Customer:
+    index:
+      query: all
+      render: admin.customer.index with:customers
+    create:
+      render: admin.customer.create
+    edit:
+      render: admin.customer.edit
+    show:
+      render: admin.customer.show with:show
+    store:
+      validate: email, phone, mobile, first_name, last_name, image
+      save: customer
+      redirect: admin.customer.index
+    update:
+      validate: email, phone, mobile, first_name, last_name, image
+      update: customer
+      redirect: admin.customer.index
+
+  Broker:
+    index:
+      query: all
+      render: admin.broker.index with:brokers
+    create:
+      render: admin.broker.create
+    edit:
+      render: admin.broker.edit
+    show:
+      render: admin.broker.show with:show
+    store:
+      validate: email, phone, mobile, name, image
+      save: broker
+      redirect: admin.broker.index
+    update:
+      validate: email, phone, mobile, name, image
+      update: broker
+      redirect: admin.broker.index
+
+  Occupation:
+    index:
+      query: all
+      render: admin.occupation.index with:occupations
+    create:
+      render: admin.occupation.create
+    edit:
+      render: admin.occupation.edit
+    show:
+      render: admin.occupation.show with:show
+    store:
+      validate: name, status
+      save: occupation
+      redirect: admin.occupation.index
+    update:
+      validate: name, status
+      update: occupation
+      redirect: admin.occupation.index
+
+  Country:
+    index:
+      query: all
+      render: admin.country.index with:countries
+    create:
+      render: admin.country.create
+    edit:
+      render: admin.country.edit
+    show:
+      render: admin.country.show with:show
+    store:
+      validate: name, status
+      save: country
+      redirect: admin.country.index
+    update:
+      validate: name, status
+      update: country
+      redirect: admin.country.index
+
+seeders: Partner, PartnerContact, Customer, Broker, Address, Occupation, Country

@@ -1,0 +1,27 @@
+models:
+
+  Project: 
+    name: string nullable
+    customer_id: id foreign:customers nullable
+    fiscal_year: year 
+
+controllers:
+  Project:
+    index:
+      query: all
+      render: admin.projects.index with:projects
+    create:
+      render: admin.projects.create
+    edit:
+      render: admin.projects.edit
+    show:
+      render: admin.projects.show with:show
+    store:
+      validate: name, fiscal_year , status
+      save: projects
+      redirect: admin.projects.index
+    update:
+      validate: name, fiscal_year , status 
+      update: customer_contact
+      redirect: admin.projects.index
+seeders: Project

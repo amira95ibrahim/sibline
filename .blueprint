@@ -1,0 +1,55 @@
+created:
+    - app/Http/Controllers/ProjectController.php
+    - database/factories/ProjectFactory.php
+    - database/migrations/2022_03_15_132116_create_projects_table.php
+    - app/Models/Project.php
+    - database/seeders/ProjectSeeder.php
+    - tests/Feature/Http/Controllers/ProjectControllerTest.php
+    - app/Http/Requests/ProjectStoreRequest.php
+    - app/Http/Requests/ProjectUpdateRequest.php
+    - resources/views/admin/projects/index.blade.php
+    - resources/views/admin/projects/create.blade.php
+    - resources/views/admin/projects/edit.blade.php
+    - resources/views/admin/projects/show.blade.php
+updated:
+    - routes/web.php
+models:
+    Permission: { parent_id: 'id foreign:permissions nullable', name: string, icon: string, menu_url: string, president: integer, status: integer, timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'Role,User' } }
+    Role: { name: string, status: 'enum:PUBLISHED,DRAFT', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Permission } }
+    User: { email: 'string unique', password: string, first_name: string, last_name: string, birth_date: date, role_id: 'id foreign:roles nullable', image: text, status: 'enum:PUBLISHED,DRAFT', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Permission } }
+    Partner: { email: 'string unique', name: 'string nullable', phone: 'string unique', mobile: 'string unique', website: 'string nullable', image: 'text nullable', address_id: 'id foreign:addresses nullable', is_verified: 'enum:0,1', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'PartnerContact,Broker', belongsTo: Address } }
+    PartnerContact: { email: 'string unique', password: string, name: 'string nullable', position: 'string nullable', phone: 'string unique', mobile: 'string unique', parent_id: 'id foreign:partners nullable', relationships: { belongsTo: Partner } }
+    Customer: { email: 'string unique', password: string, first_name: 'string nullable', last_name: 'string nullable', birth_date: 'date nullable', phone: 'string unique', mobile: 'string unique', address_id: 'id foreign:addresses nullable', occupation_id: 'id foreign:occupations nullable', passport_number: 'string unique', passport_photo: 'string nullable', image: 'text nullable', uuid: 'string unique nullable', platform: 'string nullable', version: 'string nullable', is_verified: 'enum:0,1', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: 'Address,Occupation' } }
+    Broker: { email: 'string unique', password: string, name: 'string nullable', phone: 'string unique', mobile: 'string unique', address_id: 'id foreign:addresses nullable', image: 'text nullable', is_verified: 'enum:0,1', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Partner, belongsTo: Address } }
+    Address: { address: 'string nullable', country_id: 'id foreign:countries nullable', city_id: 'id foreign:countries nullable', area_id: 'id foreign:countries nullable', gps: 'string nullable', street: 'string nullable', zip_code: 'string nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: 'Broker,Customer,Partner', belongsTo: Country } }
+    Occupation: { name: 'string nullable', arabic_name: 'string nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Customer } }
+    Country: { parent_id: 'id foreign:countries nullable', name: 'string nullable', arabic_name: 'string nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Address } }
+    Page: { url: 'string unique', name: 'string nullable', title: 'string nullable', content: 'string unique', brief: 'string unique', open_in_new_tab: 'enum:0,1', display_top_menu: 'enum:0,1', display_sidebar: 'enum:0,1', president: integer, parent_id: 'id foreign:pages nullable', icon: 'text nullable', photo: 'text nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes }
+    Developer: { email: 'string unique', name: 'string nullable', phone: 'string unique', mobile: 'string unique', address_id: 'id foreign:addresses nullable', image: 'text nullable', notes: 'text nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: Address } }
+    Amenity: { name: 'string nullable', image: 'text nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes }
+    PropertyType: { name: 'string nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes }
+    Property: { title: string, brief: 'text nullable', description: 'text nullable', min_investment: integer, max_investment: integer, rental_breakdown: integer, target_Period: integer, start_date: 'date nullable', end_date: 'date nullable', image: 'text nullable', thumb: 'text nullable', video: 'text nullable', size: integer, status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: 'PropertyType, Customer, Developer, Broker, Partner, Address', hasMany: 'Property, Video, Document, Amenity, Share' } }
+    Photo: { title: 'string nullable', url: 'text nullable', thumb: 'text nullable', timestamps: timestamps, relationships: { belongsToMany: Property } }
+    Video: { title: 'string nullable', url: 'text nullable', timestamps: timestamps, relationships: { belongsToMany: Property } }
+    Document: { title: 'string nullable', url: 'text nullable', timestamps: timestamps, relationships: { belongsToMany: Property } }
+    Share: { title: 'string nullable', percentage: integer, amount: integer, status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: 'Property, Customer', belongsToMany: Order } }
+    Order: { buyer_id: 'id foreign:customers nullable', seller_id: 'id foreign:customers nullable', amount: integer, timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsTo: Property, hasMany: Share } }
+    Revenue: { title: string, property_id: 'id foreign:properties nullable', partner_id: 'id foreign:partners nullable', amount: integer, date: 'date nullable', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Photo } }
+    Expense: { title: string, property_id: 'id foreign:properties nullable', partner_id: 'id foreign:partners nullable', amount: integer, date: 'date nullable', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Photo } }
+    Update: { title: string, property_id: 'id foreign:properties nullable', partner_id: 'id foreign:partners nullable', description: 'text nullable', date: 'date nullable', timestamps: timestamps, softdeletes: softDeletes, relationships: { hasMany: Photo } }
+    WalletTransaction: { customer_id: 'id foreign:customers nullable', order_id: 'id foreign:orders nullable', amount: integer, type: 'enum:in,out', payment_type: 'enum:creditCard,BankTransfer,Cash', timestamps: timestamps, softdeletes: softDeletes }
+    Email: { driver: 'text nullable', host: 'text nullable', port: 'text nullable', username: 'text nullable', password: 'text nullable', encryption: 'text nullable', from_address: 'text nullable', from_name: 'text nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes }
+    SystemSetting: { name: 'text nullable', short_name: 'text nullable', address: 'text nullable', footer_text: 'text nullable', phone: 'text nullable', email: 'text nullable', facebook: 'text nullable', twitter: 'text nullable', youtube: 'text nullable', logo_header: 'text nullable', logo_footer: 'text nullable', favicon: 'text nullable', status: 'enum:0,1', timestamps: timestamps, softdeletes: softDeletes }
+    CommissionSetting: { wallet_in: 'integer nullable', wallet_out: 'integer nullable', shares_buying: 'integer nullable', shares_selling: 'integer nullable', type: 'enum:BROKER, PARTNER, CUSTOMER', timestamps: timestamps, softdeletes: softDeletes }
+    Commission: { wallet_in: 'integer nullable', wallet_out: 'integer nullable', shares_buying: 'integer nullable', shares_selling: 'integer nullable', timestamps: timestamps, softdeletes: softDeletes }
+    CommissionTransaction: { percentage: 'integer nullable', value: 'integer nullable', broker_id: 'id foreign:brokers nullable', partner_id: 'id foreign:partners nullable', order_id: 'id foreign:orders nullable', wallet_transaction_id: 'id foreign:wallet_transactions nullable', timestamps: timestamps, softdeletes: softDeletes }
+    RentContract: { rental_period: 'integer nullable', amount: 'integer nullable', description: 'text nullable', start_date: 'date nullable', end_date: 'date nullable', commission_id: 'id foreign:commissions nullable', customer_id: 'id foreign:customers nullable', timestamps: timestamps, softdeletes: softDeletes, relationships: { belongsToMany: Document } }
+    RevenueCustomer: { name: 'string nullable', amount: 'integer nullable', percentage: 'float nullable', commission: 'float nullable', date: 'date nullable', revenue_id: 'id foreign:revenues nullable', timestamps: timestamps, softdeletes: softDeletes }
+    Notification: { title: 'string nullable', description: 'text nullable', receiver_id: 'integer nullable', receiver_model: 'string nullable', reference_id: 'integer nullable', reference_url: 'text nullable', timestamps: timestamps, softdeletes: softDeletes }
+    Bid: { sender_id: 'id foreign:customers nullable', receiver_id: 'id foreign:customers nullable', message_send: 'text nullable', message_reply: 'text nullable', property_id: 'id foreign:properties nullable', percentage: 'float nullable', amount: 'integer nullable', status: 'enum:PENDING,APPROVED,DECLINED', timestamps: timestamps, softdeletes: softDeletes }
+    Sell: { customer_id: 'id foreign:customers nullable', property_id: 'id foreign:properties nullable', percentage: 'float nullable', amount: 'integer nullable', status: 'enum:PENDING,APPROVED', timestamps: timestamps, softdeletes: softDeletes }
+    Payment: { partner_id: 'id foreign:partners nullable', broker_id: 'id foreign:brokers nullable', brief: 'text nullable', amount: 'float nullable', date: 'date nullable', document: 'text nullable', timestamps: timestamps, softdeletes: softDeletes }
+    MoneyTransfer: { sender_id: 'id foreign:customers nullable', receiver_id: 'id foreign:customers nullable', amount: 'float nullable', timestamps: timestamps, softdeletes: softDeletes }
+    Faq: { question: 'text nullable', answer: 'text nullable', timestamps: timestamps, softdeletes: softDeletes }
+    CustomerContact: { email: 'string unique', password: string, name: 'string nullable', position: 'string nullable', phone: 'string unique', mobile: 'string unique', customer_id: 'id foreign:customers nullable' }
+    Project: { name: 'string nullable', customer_id: 'id foreign:customers nullable', fiscal_year: year }

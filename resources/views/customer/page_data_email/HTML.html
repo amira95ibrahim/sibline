@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from laravel.spruko.com/valex/leftmenu-light-rtl/500 by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 12 Jun 2020 07:58:27 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
+    <meta name="Author" content="Spruko Technologies Private Limited">
+    <meta name="Keywords"
+        content="admin,admin dashboard,admin dashboard template,admin panel template,admin template,admin theme,bootstrap 4 admin template,bootstrap 4 dashboard,bootstrap admin,bootstrap admin dashboard,bootstrap admin panel,bootstrap admin template,bootstrap admin theme,bootstrap dashboard,bootstrap form template,bootstrap panel,bootstrap ui kit,dashboard bootstrap 4,dashboard design,dashboard html,dashboard template,dashboard ui kit,envato templates,flat ui,html,html and css templates,html dashboard template,html5,jquery html,premium,premium quality,sidebar bootstrap 4,template admin bootstrap 4" />
+    <!-- Title -->
+    <title> Valex - Premium dashboard ui bootstrap rwd admin html5 template </title>
+    <!-- Favicon -->
+    <link rel="icon" href="{{asset('admin-assets/assets/img/brand/favicon.png')}}" type="image/x-icon" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!---Switcher css-->
+    <link href="{{asset('admin-assets/assets/switcher/css/switcher.css')}}" rel="stylesheet">
+    <link href="{{asset('admin-assets/assets/switcher/demo.css')}}" rel="stylesheet">
+
+
+
+</head>
+
+<body style="bg-primary-transparent:#fff" class="main-body bg-primary-transparent">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- Main-error-wrapper -->
+                <div class="main-error-wrapper  page page-h ">
+                    <div class="row d-flex justify-content-center">
+                        <img src="{{asset('images/'.$system_info->logo_header)}}" class="error-page " alt="error">
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="card text-black mb-3" style="max-width: 18rem;">
+                                <div style="background-color:rgb(141, 6, 6);color:#fff" class="card-header">Project And
+                                    Account Data
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h5 class="card-title">{{ $account->project->name ?? 'Project Name'}}</h5>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="card-text">{{ $account->project->name ?? 'Project Name'}}</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p class="card-text"> Fiscal Year : {{ $account->project->fiscal_year ?? '
+                                                '}}</p>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card text-white mb-3" style="max-width: 18rem;">
+                                <div style="background-color:rgb(141, 6, 6);color:#fff" class="card-header">Your Company
+                                </div>
+                                <div class="card-body" style="color:black">
+                                    <h5 class="card-title" style="color:black">{{$customer_contact->customer->name}}
+                                    </h5>
+                                    <p class="card-text" style="color:black">{{$customer_contact->customer->email}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="card text-white mb-3" style="max-width: 18rem;">
+                                <div style="background-color:rgb(141, 6, 6);color:#fff" class="card-header">System
+                                    Information</div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6" style="color:black">
+                                            <h5 class="card-title" style="color:black">{{$system_setting->name}}</h5>
+                                            <h6 class="card-title" style="color:black">{{$system_setting->short_name}}
+                                            </h6>
+                                        </div>
+                                        <div class="col-6">
+                                            <img class="rounded" style="width:140px;heigth:140px"
+                                                src="{{asset('images/'.$system_setting->logo_header )}}"
+                                                alt="{{ $system_setting->name }}">
+                                        </div>
+                                        <div class="col-6" style="color:black">
+                                            <p>{{$system_setting->email}}</p>
+                                            <p>{{$system_setting->phone}}</p>
+                                            <p>{{$system_setting->address}}</p>
+                                        </div>
+                                    </div>
+
+                                    <p class="card-text"> </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    Answer the respons
+                                </div>
+                                <div class="card-body">
+                                    <form action="post" method="#">
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+
+                                                <label>Choose a Type of response</label>
+                                                <input type="radio" class="btn-check" name="type_replay" value="1"
+                                                    id="success-outlined" autocomplete="off" checked>
+                                                <label class="btn btn-outline-success"
+                                                    for="success-outlined">Replay</label>
+
+                                                <input type="radio" class="btn-check" name="type_replay" value="2"
+                                                    id="info-outlined" autocomplete="off">
+                                                <label class="btn btn-outline-info" for="info-outlined">Decline</label>
+
+                                                <input type="radio" class="btn-check" name="type_replay" value="3"
+                                                    id="danger-outlined" autocomplete="off">
+                                                <label class="btn btn-outline-danger" for="danger-outlined">More info
+                                                    need</label>
+
+                                            </div>
+
+                                            <div class="col-md-6">
+
+
+                                                <label> Reply </label>
+                                                <input type="radio" class="btn-check" name="is_replay" value="1"
+                                                    id="success-reply" autocomplete="off" checked>
+                                                <label class="btn btn-outline-success"
+                                                    for="success-reply">Replay</label>
+
+                                                <input type="radio" class="btn-check" name="is_replay" value="2"
+                                                    id="info-reply" autocomplete="off">
+                                                <label class="btn btn-outline-info" for="info-reply">Decline</label>
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+
+                                                <div class="input-group">
+                                                    <span class="input-group-text">With textarea</span>
+                                                    <textarea class="form-control" name="comment"
+                                                        aria-label="With textarea"></textarea>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-12">
+                                                <label>Attachement</label>
+                                                <div class="input-group">
+
+                                                    <input class="form-control" name="attachement" type="file">
+                                                </div>
+                                            </div>
+
+                                            <div class="row col-md-12 mb-3 mt-3">
+
+                                                <div class="col-md-6 mb-2 form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">first name</span>
+                                                        <input type="text" class="form-control" name="c_first_name" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6 mb-2 form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text"> last name</span>
+                                                        <input type="text" class="form-control" name="c_last_name" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6 mb-2  form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">email</span>
+                                                        <input type="text" class="form-control" name="c_email" />
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-6 mb-2 form-group">
+                                                    <div class="input-group">
+                                                        <span class="input-group-text">position</span>
+                                                        <input type="text" class="form-control" name="position" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary">Sign in</button>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- /Main-error-wrapper -->
+                <!-- Back-to-top -->
+                <a href="#top" id="back-to-top"><i class="las la-angle-double-up"></i></a>
+                <!-- JQuery min js -->
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+</html>
