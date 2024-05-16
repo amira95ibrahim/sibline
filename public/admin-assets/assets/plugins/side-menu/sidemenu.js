@@ -47,7 +47,7 @@
 		  e.preventDefault();
 		}
 	});
-	
+
 	// Activate sidebar slide toggle
 	$("[data-toggle='sub-slide']").on('click', function(e) {
 		var $this = $(this);
@@ -75,23 +75,23 @@
 		  e.preventDefault();
 		}
 	});
-	
+
 	//Activate bootstrip tooltips
 	$("[data-toggle='tooltip']").tooltip();
-	
-	
+
+
 	// ______________Active Class
 	$(".app-sidebar li a").each(function() {
 	  var pageUrl = window.location.href.split(/[?#]/)[0];
-		if (this.href == pageUrl) { 
+		if (this.href == pageUrl) {
 			$(this).addClass("active");
 			$(this).parent().addClass("active"); // add active to li of the current link
 			$(this).parent().parent().prev().addClass("active"); // add active class to an anchor
-			$(this).parent().parent().parent().parent().parent().addClass("active"); 
+			$(this).parent().parent().parent().parent().parent().addClass("active");
 			$(this).parent().parent().prev().click(); // click the item to make it drop
 		}
 	});
-	
+
 	var toggleSidebar = function() {
 		var w = $(window);
 		if(w.outerWidth() <= 1024) {
@@ -109,9 +109,9 @@
 	}
 	toggleSidebar();
 	$(window).resize(toggleSidebar);
-	
-	
-	
+
+
+
 	//P-scrolling
 	const ps = new PerfectScrollbar('.app-sidebar', {
 	  useBothWheelAxes:true,

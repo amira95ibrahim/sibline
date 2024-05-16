@@ -32,8 +32,8 @@ class AuthController extends Controller
     {
 
        // dd(auth()->guard());
-      // Validate the form data
-      $this->validate($request, [
+       // Validate the form data
+       $this->validate($request, [
         'email'   => 'required|email',
         'password' => 'required'
       ]);
