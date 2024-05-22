@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost:8000'),
+    'url' => env('APP_URL', 'http://localhost:8000/admin'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -165,7 +165,7 @@ return [
         \Yajra\DataTables\ButtonsServiceProvider::class,
         \Intervention\Image\ImageServiceProvider::class,
         \Barryvdh\DomPDF\ServiceProvider::class,
-        
+
 
         /*
          * Package Service Providers...

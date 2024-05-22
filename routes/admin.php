@@ -6,6 +6,16 @@ Route::group(['prefix'=>'admin','middleware'=>['auth:admin','permission'],'as'=>
 
 	Route::resource('email-template', App\Http\Controllers\Admin\EmailTemplateController::class)->except('destroy');
     Route::resource('user', App\Http\Controllers\Admin\UserController::class);
+    Route::resource('form1', App\Http\Controllers\Admin\Form1Controller::class);
+    Route::resource('form2', App\Http\Controllers\Admin\Form2Controller::class);
+    Route::resource('form3', App\Http\Controllers\Admin\Form3Controller::class);
+    Route::resource('form4', App\Http\Controllers\Admin\Form4Controller::class);
+    Route::resource('form5', App\Http\Controllers\Admin\Form5Controller::class);
+    Route::resource('form6', App\Http\Controllers\Admin\Form6Controller::class);
+    Route::resource('form7', App\Http\Controllers\Admin\Form7Controller::class);
+    Route::resource('form8', App\Http\Controllers\Admin\Form8Controller::class);
+    Route::resource('form9', App\Http\Controllers\Admin\Form9Controller::class);
+    Route::resource('form10', App\Http\Controllers\Admin\Form10Controller::class);
 
     Route::resource('role', App\Http\Controllers\Admin\RoleController::class);
 
@@ -16,20 +26,20 @@ Route::group(['prefix'=>'admin','middleware'=>['auth:admin','permission'],'as'=>
 	Route::post('/sendRequestsCustomer', [App\Http\Controllers\Admin\ProjectController::class , 'sendRequestsCustomer'])->name('sendRequestsCustomer');
 	Route::post('/sendConfirmationCustomer', [App\Http\Controllers\Admin\ProjectController::class , 'sendConfirmationCustomer'])->name('sendConfirmationCustomer');
 	Route::delete('multi-delete',[ App\Http\Controllers\Admin\ProjectController::class , 'multi_delete'])->name('multi-delete');
-	
+
 	Route::get('/engagment-Letter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'engagmentLetter'])->name('engagment-Letter');
     Route::get('/representationLetter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'representationLetter'])->name('representationLetter');
     Route::get('/authorizationLetter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'authorizationLetter'])->name('authorizationLetter');
     Route::get('/approvalRequest/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'approvalRequest'])->name('approvalRequest');
-    
+
     Route::post('/sendEmailLetter', [App\Http\Controllers\Admin\ProjectController::class , 'sendEmailLetter'])->name('sendEmailLetter');
 
     Route::get('/suppliers/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'suppliers'])->name('suppliers');
     Route::get('/clients/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'clients'])->name('clients');
     Route::get('/bankconfirmation/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'bankconfirmation'])->name('bankconfirmation');
-    
-  
-    
+
+
+
 	Route::get('get_accounts',[App\Http\Controllers\Admin\ProjectController::class , 'ajax'])->name('get_accounts');
 
 	Route::get('get_data_accounts_ajax/{id}',[App\Http\Controllers\Admin\ProjectController::class , 'get_data_accounts_ajax'])->name('get_data_accounts_ajax');
@@ -75,17 +85,17 @@ Route::group(['prefix'=>'admin','middleware'=>['auth:admin','permission'],'as'=>
 
 ################### start download links ##############################
 Route::group(['prefix'=>'download'],function(){
-    
+
     Route::get('/clients/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_clients'])->name('download_clients');
     Route::get('/banks/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_banks'])->name('download_banks');
     Route::get('/suppliers/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_suppliers'])->name('download_suppliers');
-    
+
     Route::get('/engagmentLetter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_engagmentLetter'])->name('download_engagmentLetter');
     Route::get('/representationLetter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_representationLetter'])->name('download_representationLetter');
     Route::get('/authorizationLetter/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_authorizationLetter'])->name('download_authorizationLetter');
     Route::get('/approvalRequest/{project}', [App\Http\Controllers\Admin\ProjectController::class , 'download_approvalRequest'])->name('download_approvalRequest');
 });
- 
+
 
 
 ################### end download links ##############################

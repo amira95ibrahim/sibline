@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-  return  redirect()->route('customer.dashboard.index');
+  return  redirect()->route('admin.dashboard.index');
 });
 Route::get('lang', [
     'as'   => 'lang',
@@ -63,62 +63,62 @@ Route::group(['prefix' => 'customer', 'middleware' => ['auth:customer'], 'as' =>
             'uses' => 'App\Http\Controllers\Admin\CustomerController@profile',
         ]);
     });
-Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
+// Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
 
 
-    Route::get('/', function () {
-        dd('sdsd');
-    });
-    Route::get('register', [
-        'as'   => 'register',
-        'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@showRegisterForm',
-    ]);
+//     Route::get('/', function () {
+//         dd('sdsd');
+//     });
+//     Route::get('register', [
+//         'as'   => 'register',
+//         'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@showRegisterForm',
+//     ]);
 
-    Route::get('login', [
-        'as'   => 'login',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@showLoginForm',
-    ]);
+//     Route::get('login', [
+//         'as'   => 'login',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@showLoginForm',
+//     ]);
 
-    Route::post('login', [
-        'as'   => 'login.submit',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@login',
-    ]);
+//     Route::post('login', [
+//         'as'   => 'login.submit',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@login',
+//     ]);
 
-    Route::get('reset', [
-        'as'   => 'reset',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@showResetForm',
-    ]);
+//     Route::get('reset', [
+//         'as'   => 'reset',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@showResetForm',
+//     ]);
 
-    Route::get('reset/{token}', [
-        'as'   => 'reset.change',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@showChangePasswordForm',
-    ]);
+//     Route::get('reset/{token}', [
+//         'as'   => 'reset.change',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@showChangePasswordForm',
+//     ]);
 
-    Route::get('activate/{token}', [
-        'as'   => 'activate.done',
-        'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@Activate',
-    ]);
+//     Route::get('activate/{token}', [
+//         'as'   => 'activate.done',
+//         'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@Activate',
+//     ]);
 
-    Route::post('send-reset-mail', [
-        'as'   => 'reset.sendMail',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@sendmail',
-    ]);
+//     Route::post('send-reset-mail', [
+//         'as'   => 'reset.sendMail',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@sendmail',
+//     ]);
 
-    Route::post('reset', [
-        'as'   => 'reset.submit',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@storeNewPassword',
-    ]);
+//     Route::post('reset', [
+//         'as'   => 'reset.submit',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@storeNewPassword',
+//     ]);
 
-    Route::post('register', [
-        'as'   => 'register.submit',
-        'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@register',
-    ]);
+//     Route::post('register', [
+//         'as'   => 'register.submit',
+//         'uses' => 'App\Http\Controllers\Auth\CustomerLoginController@register',
+//     ]);
 
-    Route::get('logout', [
-        'as'   => 'logout',
-        'uses' => 'App\Http\Controllers\Auth\AuthController@logout',
-    ]);
-});
+//     Route::get('logout', [
+//         'as'   => 'logout',
+//         'uses' => 'App\Http\Controllers\Auth\AuthController@logout',
+//     ]);
+// });
 
 
 
