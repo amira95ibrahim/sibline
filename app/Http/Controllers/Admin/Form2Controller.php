@@ -22,7 +22,7 @@ class Form2Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('admin.form2.create');
     }
@@ -55,7 +55,7 @@ class Form2Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         return view('admin.form2.edit');
     }

@@ -48,7 +48,7 @@
 
                         <div class="table-responsive userlist-table">
 
-                            {!! $dataTable->table() !!}
+                            {!! $dataTable ?? ''->table() !!}
 
                         </div>
 
@@ -62,7 +62,7 @@
 @endsection
 
 @push('script')
-{!! $dataTable->scripts() !!}
+{!! $dataTable ?? ''->scripts() !!}
 @endpush
 
 

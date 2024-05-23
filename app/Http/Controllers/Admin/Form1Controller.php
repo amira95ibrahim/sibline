@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\CountryDataTable;
 use Illuminate\Http\Request;
 
 class Form1Controller extends Controller
@@ -12,9 +13,9 @@ class Form1Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CountryDataTable $dataTable)
     {
-        return view('admin.form1.index');
+        return $dataTable->render('admin.form1.index');
     }
 
     /**
@@ -22,7 +23,7 @@ class Form1Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('admin.form1.create');
     }
@@ -55,7 +56,7 @@ class Form1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
         return view('admin.form1.edit');
     }

@@ -7,7 +7,7 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Manage Form1</h4>
+                    <h4 class="content-title mb-0 my-auto">Security Username</h4>
 
                 </div>
 
@@ -25,8 +25,15 @@
                 <div class="card">
 
                     <div class="card-body">
-                    
 
+
+                        <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
+
+                            {!!Form::text('coupon', 'coupon / رقم البون')!!}
+                        </div>
+                        <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
+                            {!!Form::text('leaving', '  leaving ')->readonly()!!}
+                        </div>
                             @if(!isset($show))
                             <div class="col-lg-12 col-xl-12-1 col-md-12 col-sm-12 d-inline-block">
                                 {!!Form::submit("Save")!!}
