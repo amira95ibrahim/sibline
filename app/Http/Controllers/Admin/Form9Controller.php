@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\SecurityLeavingDataTable;
+use App\Models\SecurityLeaving;
 use Illuminate\Http\Request;
 
 class Form9Controller extends Controller
@@ -12,9 +14,9 @@ class Form9Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SecurityLeavingDataTable $dataTable)
     {
-        return view('admin.form9.index');
+        return $dataTable->render('admin.form9.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form9Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,SecurityLeaving $SecurityLeaving )
     {
-        return view('admin.form9.edit');
+        return view('admin.form9.create','SecurityLeaving',$SecurityLeaving);
     }
 
     /**
@@ -80,6 +82,10 @@ class Form9Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $SecurityLeaving= SecurityLeaving::find($id);
+        $SecurityLeaving->delete();
+
+        return response()->json(array('msg'=> 'SecurityLeaving Deleted Successfully'), 200);
     }
 }

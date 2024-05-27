@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','Security leaving')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,7 +7,7 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Security Username</h4>
+                    <h4 class="content-title mb-0 my-auto">Security leaving</h4>
 
                 </div>
 
@@ -26,6 +26,12 @@
 
                     <div class="card-body">
 
+                        @if(isset($SecurityLeaving))
+
+                        {!!Form::open()->fill($SecurityLeaving)->put()->multipart()->route('admin.form9.update',[$SecurityLeaving->id])!!}
+                    @else
+                        {!!Form::open()->multipart()->route('admin.form9.store')!!}
+                    @endif
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 

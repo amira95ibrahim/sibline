@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','RM Weighbridge OUT')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,12 +7,32 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Manage Form4</h4>
+                    <h4 class="content-title mb-0 my-auto">RM Weighbridge OUT</h4>
 
                 </div>
 
             </div>
+
+            <div class="d-flex my-xl-auto right-content">
+
+              <div class="pr-1 mb-3 mb-xl-0">
+
+                    <a href="{{ url('admin/form4/create') }}" title="Add RM Weighbridge OUT">
+
+                        <button type="button" class="btn btn-primary"><i class="mdi mdi-plus"></i></button>
+
+                    </a>
+
+                </div>
+
+
+
+
+
+            </div>
+
         </div>
+
 
         <!-- breadcrumb -->
 
@@ -26,15 +46,11 @@
 
                     <div class="card-body">
 
+                        <div class="table-responsive userlist-table">
 
-                            @if(!isset($show))
-                            <div class="col-lg-12 col-xl-12-1 col-md-12 col-sm-12 d-inline-block">
-                                {!!Form::submit("Save")!!}
-                            </div>
-                            @endif
+                            {!! $dataTable ->table() !!}
 
-
-                            {!!Form::close()!!}
+                        </div>
 
                     </div>
 
@@ -46,5 +62,7 @@
 @endsection
 
 @push('script')
-
+{!! $dataTable ->scripts() !!}
 @endpush
+
+

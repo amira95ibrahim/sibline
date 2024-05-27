@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\DataTables\CountryDataTable;
+use App\Models\CouponsGenerating;
+use App\DataTables\Admin\CouponsGeneratingDataTable;
 use Illuminate\Http\Request;
 
 class Form1Controller extends Controller
@@ -13,7 +14,7 @@ class Form1Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CountryDataTable $dataTable)
+    public function index(CouponsGeneratingDataTable $dataTable)
     {
         return $dataTable->render('admin.form1.index');
     }
@@ -56,11 +57,13 @@ class Form1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
-    {
-        return view('admin.form1.edit');
-    }
 
+
+     public function edit(Request $request,$id)
+     {
+        $CouponsGenerating= CouponsGenerating::find($id);
+         return view('admin.form1.create')->with('CouponsGenerating', $CouponsGenerating);
+     }
     /**
      * Update the specified resource in storage.
      *
@@ -68,9 +71,12 @@ class Form1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  $id)
     {
-        //
+        $CouponsGenerating= CouponsGenerating::find($id);
+        $CouponsGenerating->update($request->validated());
+
+        return redirect()->route('admin.form1.index');
     }
 
     /**
@@ -81,6 +87,9 @@ class Form1Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+       $CouponsGenerating= CouponsGenerating::find($id);
+        $CouponsGenerating->delete();
+
+        return response()->json(array('msg'=> 'CouponsGenerating Deleted Successfully'), 200);
     }
 }

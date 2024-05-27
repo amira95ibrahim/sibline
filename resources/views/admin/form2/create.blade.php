@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','Kiosk coordinator')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -8,7 +8,7 @@
                 <div class="d-flex">
 
                     <h4 class="content-title mb-0 my-auto">Kiosk coordinator
-                        Username</h4>
+                        </h4>
 
                 </div>
 
@@ -27,7 +27,12 @@
 
                     <div class="card-body">
 
+                        @if(isset($KioskCoordinator))
 
+                        {!!Form::open()->fill($KioskCoordinator)->put()->multipart()->route('admin.form2.update',[$KioskCoordinator->id])!!}
+                    @else
+                        {!!Form::open()->multipart()->route('admin.form2.store')!!}
+                    @endif
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
                             {!!Form::text('coupon', 'coupon / رقم البون')!!}
@@ -60,7 +65,7 @@
                             {!!Form::text('truck_plate', 'truck plate / رقم لوحة الشاحنة ')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('registeration_date&time', 'registeration date / وقت وتاريخ التسجيل')->readonly()!!}
+                            {!!Form::text('registeration_date_time', 'registeration date / وقت وتاريخ التسجيل')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('storage_location', ' storage location / مكان التفريغ والتخزين ')->readonly()!!}

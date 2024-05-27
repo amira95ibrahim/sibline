@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\SalesWeighbridgeOUTDataTable;
+use App\Models\SalesWeighbridgeOUT;
 use Illuminate\Http\Request;
 
 class Form7Controller extends Controller
@@ -12,9 +14,9 @@ class Form7Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SalesWeighbridgeOUTDataTable $dataTable)
     {
-        return view('admin.form7.index');
+        return $dataTable->render('admin.form7.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form7Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,SalesWeighbridgeOUT $SalesWeighbridgeOUT)
     {
-        return view('admin.form7.edit');
+        return view('admin.form7.create')->with('SalesWeighbridgeOUT',$SalesWeighbridgeOUT);
     }
 
     /**
@@ -80,6 +82,10 @@ class Form7Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $SalesWeighbridgeOUT= SalesWeighbridgeOUT::find($id);
+        $SalesWeighbridgeOUT->delete();
+
+        return response()->json(array('msg'=> 'SalesWeighbridgeOUT Deleted Successfully'), 200);
     }
 }

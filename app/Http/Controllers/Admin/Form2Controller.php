@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\KioskCoordinatorDataTable;
+use App\Models\KioskCoordinator;
 use Illuminate\Http\Request;
 
 class Form2Controller extends Controller
@@ -12,9 +14,9 @@ class Form2Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(KioskCoordinatorDataTable $dataTable)
     {
-        return view('admin.form2.index');
+        return $dataTable->render('admin.form2.index');
     }
 
     /**
@@ -35,7 +37,9 @@ class Form2Controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $KioskCoordinator = KioskCoordinator::create($request->validated());
+
+        return redirect()->route('admin.form2.index');
     }
 
     /**
@@ -55,9 +59,10 @@ class Form2Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, $id)
     {
-        return view('admin.form2.edit');
+         $KioskCoordinator=KioskCoordinator::find($id);
+        return view('admin.form2.create')->with('KioskCoordinator', $KioskCoordinator);;
     }
 
     /**
@@ -69,7 +74,10 @@ class Form2Controller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $KioskCoordinator= KioskCoordinator::find($id);
+        $KioskCoordinator->update($request->validated());
+
+        return redirect()->route('admin.form2.index');
     }
 
     /**
@@ -80,6 +88,9 @@ class Form2Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $KioskCoordinator= KioskCoordinator::find($id);
+        $KioskCoordinator->delete();
+
+        return response()->json(array('msg'=> 'KioskCoordinator Deleted Successfully'), 200);
     }
 }

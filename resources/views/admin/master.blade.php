@@ -51,7 +51,7 @@
                     'icon_class' => 'fa fa-area-chart',
                     'name' => 'Dashboard',
                     'main_route' => 'dashboard',
-                ],  
+                ],
 
 
             ],
@@ -83,7 +83,7 @@
             <!-- Footer opened -->
             <div class="main-footer ht-40">
                 <div class="container-fluid pd-t-0-f ht-100p">
-                    <span>Copyright © 2022 <a href="#">AFS</a>. Designed by <a
+                    <span>Copyright © 2022 <a href="#">Sibline</a>. Designed by <a
                             href="https://optimalsolutionscorp.com/">Optimal Solutions</a> All rights reserved.</span>
                 </div>
             </div>

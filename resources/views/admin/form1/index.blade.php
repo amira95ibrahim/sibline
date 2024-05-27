@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Countries')
+@section('title','Warehouse Coordinator')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,7 +7,7 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Countries</h4>
+                    <h4 class="content-title mb-0 my-auto">Warehouse coordinators</h4>
 
                 </div>
 
@@ -17,7 +17,7 @@
 
               <div class="pr-1 mb-3 mb-xl-0">
 
-                    <a href="{{ url('admin/form1/create') }}" title="Add Country">
+                    <a href="{{ url('admin/form1/create') }}" title="Add Warehouse coordinator">
 
                         <button type="button" class="btn btn-primary"><i class="mdi mdi-plus"></i></button>
 
@@ -48,7 +48,7 @@
 
                         <div class="table-responsive userlist-table">
 
-                            {!! $dataTable ?? ''->table() !!}
+                            {!! $dataTable ->table() !!}
 
                         </div>
 
@@ -62,7 +62,7 @@
 @endsection
 
 @push('script')
-{!! $dataTable ?? ''->scripts() !!}
+{!! $dataTable ->scripts() !!}
 @endpush
 
 

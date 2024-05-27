@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','Sales Weighbridge IN')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,8 +7,8 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Sales Weighbridge
-                        Username</h4>
+                    <h4 class="content-title mb-0 my-auto">Sales Weighbridge IN
+                        </h4>
 
                 </div>
 
@@ -27,6 +27,12 @@
 
                     <div class="card-body">
 
+                        @if(isset($SalesWeighbridgeIN))
+
+                        {!!Form::open()->fill($SalesWeighbridgeIN)->put()->multipart()->route('admin.form6.update',[$SalesWeighbridgeIN->id])!!}
+                    @else
+                        {!!Form::open()->multipart()->route('admin.form6.store')!!}
+                    @endif
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 

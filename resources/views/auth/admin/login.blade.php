@@ -14,7 +14,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title','AFS - Login')</title>
+    <title>@yield('title','sibline - Login')</title>
 
 
 
@@ -46,7 +46,7 @@
                     <div class="col-md-6 col-lg-6 col-xl-7 d-none d-md-flex bg-primary-transparent m-0 p-0">
                         <div class="row wd-100p mx-auto text-center m-0 p-0">
                             <div class="col-md-12 col-lg-12 col-xl-12 m-0 p-0">
-                                <img src="{{ asset('admin-assets/img/media/lockscreen.jpg') }}" class="my-auto ht-xl-80p wd-md-100p h-100" alt="logo">
+                                <img src="{{ asset('admin-assets/img/media/lockscreen.jpg') }}"   class="my-auto ht-xl-80p wd-md-100p h-100" alt="logoobject-fit: cover;">
                             </div>
                         </div>
                     </div>

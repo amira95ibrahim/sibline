@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','Quarry coordinator')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -8,7 +8,7 @@
                 <div class="d-flex">
 
                     <h4 class="content-title mb-0 my-auto">Quarry coordinator
-                        Username</h4>
+                        </h4>
 
                 </div>
 
@@ -27,6 +27,12 @@
 
                     <div class="card-body">
 
+                        @if(isset($QuarryCoordinator))
+
+                        {!!Form::open()->fill($QuarryCoordinator)->put()->multipart()->route('admin.form10.update',[$QuarryCoordinator->id])!!}
+                    @else
+                        {!!Form::open()->multipart()->route('admin.form10.store')!!}
+                    @endif
 
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">

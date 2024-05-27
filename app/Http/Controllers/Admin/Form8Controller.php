@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\SecurityArrivalDataTable;
+use App\Models\SecurityArrival;
 use Illuminate\Http\Request;
 
 class Form8Controller extends Controller
@@ -12,9 +14,9 @@ class Form8Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SecurityArrivalDataTable $dataTable)
     {
-        return view('admin.form8.index');
+        return $dataTable->render('admin.form8.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request, SecurityArrival $SecurityArrival)
     {
-        return view('admin.form8.edit');
+        return view('admin.form8.create')->with('SecurityArrival',$SecurityArrival);
     }
 
     /**
@@ -80,6 +82,10 @@ class Form8Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $SecurityArrival= SecurityArrival::find($id);
+        $SecurityArrival->delete();
+
+        return response()->json(array('msg'=> 'SecurityArrival Deleted Successfully'), 200);
     }
 }

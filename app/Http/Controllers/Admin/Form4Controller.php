@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\RMWeighbridgeOUTDataTable;
+use App\Models\RMWeighbridgeOUT;
 use Illuminate\Http\Request;
 
 class Form4Controller extends Controller
@@ -12,9 +14,9 @@ class Form4Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RMWeighbridgeOUTDataTable $dataTable)
     {
-        return view('admin.form4.index');
+        return $dataTable->render('admin.form4.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form4Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,RMWeighbridgeOUT $RMWeighbridgeOUT)
     {
-        return view('admin.form4.edit');
+        return view('admin.form4.create')->with('RMWeighbridgeOUT',$RMWeighbridgeOUT);
     }
 
     /**
@@ -80,6 +82,9 @@ class Form4Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $RMWeighbridgeOUT= RMWeighbridgeOUT::find($id);
+        $RMWeighbridgeOUT->delete();
+
+        return response()->json(array('msg'=> 'RMWeighbridgeOUT Deleted Successfully'), 200);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\SalesWeighbridgeINDataTable;
+use App\Models\SalesWeighbridgeIN;
 use Illuminate\Http\Request;
 
 class Form6Controller extends Controller
@@ -12,9 +14,9 @@ class Form6Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(SalesWeighbridgeINDataTable $dataTable)
     {
-        return view('admin.form6.index');
+        return $dataTable->render('admin.form6.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form6Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,SalesWeighbridgeIN $SalesWeighbridgeIN)
     {
-        return view('admin.form6.edit');
+        return view('admin.form6.create')->with('SalesWeighbridgeIN',$SalesWeighbridgeIN);
     }
 
     /**
@@ -80,6 +82,10 @@ class Form6Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $SalesWeighbridgeIN= SalesWeighbridgeIN::find($id);
+        $SalesWeighbridgeIN->delete();
+
+        return response()->json(array('msg'=> 'SalesWeighbridgeIN Deleted Successfully'), 200);
     }
 }

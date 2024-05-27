@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Faq')
+@section('title','Warehouse coordinator')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -8,7 +8,7 @@
                 <div class="d-flex">
 
                     <h4 class="content-title mb-0 my-auto">Warehouse coordinator
-                        Username</h4>
+                        </h4>
 
                 </div>
 
@@ -27,6 +27,12 @@
 
                     <div class="card-body">
 
+                        @if(isset($CouponsGenerating))
+
+                        {!!Form::open()->fill($CouponsGenerating)->put()->multipart()->route('admin.form1.update',[$CouponsGenerating->id])!!}
+                    @else
+                        {!!Form::open()->multipart()->route('admin.form1.store')!!}
+                    @endif
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
                             {!!Form::select('purcashe_order', 'purcashe order / رقم طلب الشراء',[1 => '1' , 0 => '0'])->required()!!}
@@ -53,7 +59,10 @@
                             {!!Form::text('RM_source', 'RM_source / مصدر المواد الأولية')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('storage_location', 'storage_location / مكان التفريغ -التخزين')->readonly()!!}
+                            {!!Form::text('storage_location', 'Storage Location / مكان التفريغ -التخزين')->readonly()!!}
+                        </div>
+                        <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
+                            {!!Form::text('truck_Av_load_weight', 'Truck Av. Load Weight /   وزن صافى حمل الشاحنة')!!}
                         </div>
 
 

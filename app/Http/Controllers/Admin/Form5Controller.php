@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\KioskCoordinatorTrancimDataTable;
+use App\Models\KioskCoordinatorTrancim;
 use Illuminate\Http\Request;
 
 class Form5Controller extends Controller
@@ -12,9 +14,9 @@ class Form5Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(KioskCoordinatorTrancimDataTable $dataTable)
     {
-        return view('admin.form5.index');
+        return $dataTable->render('admin.form5.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form5Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,KioskCoordinatorTrancim $KioskCoordinatorTrancim)
     {
-        return view('admin.form5.edit');
+        return view('admin.form5.create')->with('KioskCoordinatorTrancim',$KioskCoordinatorTrancim);
     }
 
     /**
@@ -80,6 +82,9 @@ class Form5Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $KioskCoordinatorTrancim= KioskCoordinatorTrancim::find($id);
+        $KioskCoordinatorTrancim->delete();
+
+        return response()->json(array('msg'=> 'KioskCoordinatorTrancim Deleted Successfully'), 200);
     }
 }

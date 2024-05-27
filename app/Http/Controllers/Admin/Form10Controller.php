@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\DataTables\Admin\QuarryCoordinatorDataTable;
+use App\Models\QuarryCoordinator;
 use Illuminate\Http\Request;
 
 class Form10Controller extends Controller
@@ -12,9 +14,9 @@ class Form10Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(QuarryCoordinatorDataTable $dataTable)
     {
-        return view('admin.form10.index');
+        return $dataTable->render('admin.form10.index');
     }
 
     /**
@@ -55,9 +57,9 @@ class Form10Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(Request $request,QuarryCoordinator $QuarryCoordinator)
     {
-        return view('admin.form10.edit');
+        return view('admin.form10.create')->with('QuarryCoordinator',$QuarryCoordinator);
     }
 
     /**
@@ -80,6 +82,9 @@ class Form10Controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $QuarryCoordinator= QuarryCoordinator::find($id);
+        $QuarryCoordinator->delete();
+
+        return response()->json(array('msg'=> 'QuarryCoordinator Deleted Successfully'), 200);
     }
 }
