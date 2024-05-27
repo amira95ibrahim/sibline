@@ -25,7 +25,6 @@ class SalesWeighbridgeINDataTable extends DataTable
                 return $coupon->parent? $coupon->parent->name : '';
             })
             ->addColumn('action', '
-            <a href="'.url('admin/form6/{{$id}}').'" class=""><i class="fas fa-eye"></i></a>
             <a href="'.url('admin/form6/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
             <a href="#" onclick="delElement(\'form6/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
             ');

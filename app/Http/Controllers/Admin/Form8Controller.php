@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form8StoreRequest;
+use App\Http\Requests\Form8UpdateRequest;
 use App\DataTables\Admin\SecurityArrivalDataTable;
 use App\Models\SecurityArrival;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form8Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form8StoreRequest $request)
     {
-        //
+        $SecurityArrival = SecurityArrival::create($request->validated());
+
+        return redirect()->route('admin.form8.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, SecurityArrival $SecurityArrival)
+    public function edit(Request $request,  $id)
     {
+        $SecurityArrival= SecurityArrival::find($id);
         return view('admin.form8.create')->with('SecurityArrival',$SecurityArrival);
     }
 
@@ -69,9 +74,12 @@ class Form8Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form8UpdateRequest $request, $id)
     {
-        //
+        $SecurityArrival= SecurityArrival::find($id);
+        $SecurityArrival->update($request->validated());
+
+        return redirect()->route('admin.form8.index');
     }
 
     /**

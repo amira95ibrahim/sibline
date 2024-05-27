@@ -42,34 +42,34 @@
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('sales_order', 'sales order / رقم أمر البيع')->readonly()!!}
+                            {!!Form::text('sales_order', 'sales order / رقم أمر البيع','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('customer_phone', 'customer phone / رقم الزبون')->readonly()!!}
+                            {!!Form::text('customer_phone', 'customer phone / رقم الزبون','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('customer_name', 'customer name /اسم الزبون' )->readonly()!!}
+                            {!!Form::text('customer_name', 'customer name /اسم الزبون' ,'test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_num', 'material num / رقم المواد')->readonly()!!}
+                            {!!Form::text('material_num', 'material num / رقم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_name', 'material name / اسم المواد')->readonly()!!}
+                            {!!Form::text('material_name', 'material name / اسم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('destination', 'destination / وجهة التسليم  ')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('Qty_loaded', 'Qty loaded / الكمية')->readonly()!!}
+                            {!!Form::text('Qty_loaded', 'Qty loaded / الكمية','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('driver_name', 'driver name /اسم السائق')->readonly()!!}
+                            {!!Form::text('driver_name', 'driver name /اسم السائق','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('driver_phone', 'driver phone /رقم السائق ')->readonly()!!}
+                            {!!Form::text('driver_phone', 'driver phone /رقم السائق ','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('truck_plate', 'truck plate /رقم لوحة الشاحنه')->readonly()!!}
+                            {!!Form::text('truck_plate', 'truck plate /رقم لوحة الشاحنه','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('truck_license', ' Truck License  / رقم دفتر الشاحنة')!!}

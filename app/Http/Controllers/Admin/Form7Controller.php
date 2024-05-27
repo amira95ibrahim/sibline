@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form7StoreRequest;
+use App\Http\Requests\Form7UpdateRequest;
 use App\DataTables\Admin\SalesWeighbridgeOUTDataTable;
 use App\Models\SalesWeighbridgeOUT;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form7Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form7StoreRequest $request)
     {
-        //
+        $SalesWeighbridgeOUT = SalesWeighbridgeOUT::create($request->validated());
+
+        return redirect()->route('admin.form7.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form7Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,SalesWeighbridgeOUT $SalesWeighbridgeOUT)
+    public function edit(Request $request, $id)
     {
+        $SalesWeighbridgeOUT= SalesWeighbridgeOUT::find($id);
         return view('admin.form7.create')->with('SalesWeighbridgeOUT',$SalesWeighbridgeOUT);
     }
 
@@ -69,9 +74,12 @@ class Form7Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form7UpdateRequest $request, $id)
     {
-        //
+        $SalesWeighbridgeOUT= SalesWeighbridgeOUT::find($id);
+        $SalesWeighbridgeOUT->update($request->validated());
+
+        return redirect()->route('admin.form7.index');
     }
 
     /**

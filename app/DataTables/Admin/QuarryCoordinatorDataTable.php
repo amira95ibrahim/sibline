@@ -25,7 +25,6 @@ class QuarryCoordinatorDataTable extends DataTable
             //     return $coupon->parent? $coupon->parent->name : '';
             // })
             ->addColumn('action', '
-            <a href="'.url('admin/form10/{{$id}}').'" class=""><i class="fas fa-eye"></i></a>
             <a href="'.url('admin/form10/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
             <a href="#" onclick="delElement(\'form10/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
             ');
@@ -72,7 +71,7 @@ class QuarryCoordinatorDataTable extends DataTable
     protected function getColumns()
     {
         return [
-           
+
             Column::make('id'),
             Column::make('coupon'),
             Column::make('material_type'),

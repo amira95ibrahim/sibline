@@ -26,7 +26,6 @@
                 <div class="card">
 
                     <div class="card-body">
-
                         @if(isset($QuarryCoordinator))
 
                         {!!Form::open()->fill($QuarryCoordinator)->put()->multipart()->route('admin.form10.update',[$QuarryCoordinator->id])!!}
@@ -42,10 +41,10 @@
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('material_type', ' material type / نوع  المواد')->readonly()!!}
+                            {!!Form::text('material_type', ' material type / نوع  المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('storage_location', 'storage location /  مكان التفريغ-التخزين')->readonly()!!}
+                            {!!Form::text('storage_location', 'storage location /  مكان التفريغ-التخزين','test')->readonly()!!}
                         </div>
 
                             @if(!isset($show))

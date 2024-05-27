@@ -25,7 +25,6 @@ class KioskCoordinatorTrancimDataTable extends DataTable
             //     return $coupon->parent? $coupon->parent->name : '';
             // })
             ->addColumn('action', '
-            <a href="'.url('admin/form5/{{$id}}').'" class=""><i class="fas fa-eye"></i></a>
             <a href="'.url('admin/form5/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
             <a href="#" onclick="delElement(\'form5/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
             ');
@@ -73,12 +72,11 @@ class KioskCoordinatorTrancimDataTable extends DataTable
     {
         return [
 
-            
+
             Column::make('coupon'),
             Column::make('sales_order'),
             Column::make('customer_name'),
             Column::make('customer_phone'),
-            Column::make('contractor_name'),
             Column::make('destination'),
             Column::make('material_name'),
             Column::make('Qty_loaded'),

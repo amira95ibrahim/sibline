@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form4StoreRequest;
+use App\Http\Requests\Form4UpdateRequest;
 use App\DataTables\Admin\RMWeighbridgeOUTDataTable;
 use App\Models\RMWeighbridgeOUT;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form4Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form4StoreRequest $request)
     {
-        //
+        $RMWeighbridgeOUT = RMWeighbridgeOUT::create($request->validated());
+
+        return redirect()->route('admin.form4.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form4Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,RMWeighbridgeOUT $RMWeighbridgeOUT)
+    public function edit(Request $request, $id)
     {
+        $RMWeighbridgeOUT= RMWeighbridgeOUT::find($id);
         return view('admin.form4.create')->with('RMWeighbridgeOUT',$RMWeighbridgeOUT);
     }
 
@@ -69,9 +74,12 @@ class Form4Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form4UpdateRequest $request, $id)
     {
-        //
+        $RMWeighbridgeOUT= RMWeighbridgeOUT::find($id);
+        $RMWeighbridgeOUT->update($request->validated());
+
+        return redirect()->route('admin.form4.index');
     }
 
     /**

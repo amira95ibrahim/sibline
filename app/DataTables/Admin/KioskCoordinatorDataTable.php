@@ -25,7 +25,6 @@ class KioskCoordinatorDataTable extends DataTable
             //     return $coupon->parent? $coupon->parent->name : '';
             // })
             ->addColumn('action', '
-            <a href="'.url('admin/form2/{{$id}}').'" class=""><i class="fas fa-eye"></i></a>
             <a href="'.url('admin/form2/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
             <a href="#" onclick="delElement(\'form2/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
             ');

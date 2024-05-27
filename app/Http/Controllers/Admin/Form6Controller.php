@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form6StoreRequest;
+use App\Http\Requests\Form6UpdateRequest;
 use App\DataTables\Admin\SalesWeighbridgeINDataTable;
 use App\Models\SalesWeighbridgeIN;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form6Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form6StoreRequest $request)
     {
-        //
+        $SalesWeighbridgeIN = SalesWeighbridgeIN::create($request->validated());
+
+        return redirect()->route('admin.form6.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form6Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,SalesWeighbridgeIN $SalesWeighbridgeIN)
+    public function edit(Request $request, $id)
     {
+        $SalesWeighbridgeIN= SalesWeighbridgeIN::find($id);
         return view('admin.form6.create')->with('SalesWeighbridgeIN',$SalesWeighbridgeIN);
     }
 
@@ -69,9 +74,12 @@ class Form6Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form6UpdateRequest $request, $id)
     {
-        //
+        $SalesWeighbridgeIN= SalesWeighbridgeIN::find($id);
+        $SalesWeighbridgeIN->update($request->validated());
+
+        return redirect()->route('admin.form6.index');
     }
 
     /**

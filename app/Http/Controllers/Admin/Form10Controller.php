@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form10StoreRequest;
+use App\Http\Requests\Form10UpdateRequest;
 use App\DataTables\Admin\QuarryCoordinatorDataTable;
 use App\Models\QuarryCoordinator;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form10Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form10StoreRequest $request)
     {
-        //
+        $QuarryCoordinator = QuarryCoordinator::create($request->validated());
+
+        return redirect()->route('admin.form10.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form10Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,QuarryCoordinator $QuarryCoordinator)
+    public function edit(Request $request, $id)
     {
+        $QuarryCoordinator= QuarryCoordinator::find($id);
         return view('admin.form10.create')->with('QuarryCoordinator',$QuarryCoordinator);
     }
 
@@ -69,9 +74,12 @@ class Form10Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form10UpdateRequest $request, $id)
     {
-        //
+        $QuarryCoordinator= QuarryCoordinator::find($id);
+        $QuarryCoordinator->update($request->validated());
+
+        return redirect()->route('admin.form10.index');
     }
 
     /**

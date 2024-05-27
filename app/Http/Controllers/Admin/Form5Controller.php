@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form5StoreRequest;
+use App\Http\Requests\Form5UpdateRequest;
 use App\DataTables\Admin\KioskCoordinatorTrancimDataTable;
 use App\Models\KioskCoordinatorTrancim;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form5Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form5StoreRequest $request)
     {
-        //
+        $KioskCoordinatorTrancim = KioskCoordinatorTrancim::create($request->validated());
+
+        return redirect()->route('admin.form5.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form5Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,KioskCoordinatorTrancim $KioskCoordinatorTrancim)
+    public function edit(Request $request, $id)
     {
+        $KioskCoordinatorTrancim= KioskCoordinatorTrancim::find($id);
         return view('admin.form5.create')->with('KioskCoordinatorTrancim',$KioskCoordinatorTrancim);
     }
 
@@ -69,9 +74,12 @@ class Form5Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form5UpdateRequest $request, $id)
     {
-        //
+        $KioskCoordinatorTrancim= KioskCoordinatorTrancim::find($id);
+        $KioskCoordinatorTrancim->update($request->validated());
+
+        return redirect()->route('admin.form5.index');
     }
 
     /**

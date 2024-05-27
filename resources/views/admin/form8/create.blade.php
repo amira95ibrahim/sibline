@@ -38,7 +38,7 @@
                             {!!Form::text('coupon', 'coupon / رقم البون')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('arrival', '  arrival')->readonly()!!}
+                            {!!Form::text('arrival', '  arrival','test')->readonly()!!}
                         </div>
                             @if(!isset($show))
                             <div class="col-lg-12 col-xl-12-1 col-md-12 col-sm-12 d-inline-block">

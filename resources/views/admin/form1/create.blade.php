@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Warehouse coordinator')
+@section('title','Coupons Generating')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,7 +7,7 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Warehouse coordinator
+                    <h4 class="content-title mb-0 my-auto">Coupons Generating
                         </h4>
 
                 </div>
@@ -41,25 +41,25 @@
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('total_quantity', 'total quantity / الكمية')->readonly()!!}
+                            {!!Form::text('total_quantity', 'total quantity / الكمية','120')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_number', 'contractor number / رقم المتعهد')->readonly()!!}
+                            {!!Form::text('contractor_number', 'contractor number / رقم المتعهد','123456')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_name', 'contractor name / اسم المتعهد')->readonly()!!}
+                            {!!Form::text('contractor_name', 'contractor name / اسم المتعهد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_num', 'material num / رقم المواد')->readonly()!!}
+                            {!!Form::text('material_num', 'material num / رقم المواد','55')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_name', 'material name / اسم المواد')->readonly()!!}
+                            {!!Form::text('material_name', 'material name / اسم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('RM_source', 'RM_source / مصدر المواد الأولية')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('storage_location', 'Storage Location / مكان التفريغ -التخزين')->readonly()!!}
+                            {!!Form::text('storage_location', 'Storage Location / مكان التفريغ -التخزين','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('truck_Av_load_weight', 'Truck Av. Load Weight /   وزن صافى حمل الشاحنة')!!}

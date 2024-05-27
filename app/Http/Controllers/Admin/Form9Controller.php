@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form9StoreRequest;
+use App\Http\Requests\Form9UpdateRequest;
 use App\DataTables\Admin\SecurityLeavingDataTable;
 use App\Models\SecurityLeaving;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form9Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form9StoreRequest $request)
     {
-        //
+        $SecurityLeaving = SecurityLeaving::create($request->validated());
+
+        return redirect()->route('admin.form9.index');
     }
 
     /**
@@ -57,9 +61,10 @@ class Form9Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,SecurityLeaving $SecurityLeaving )
+    public function edit(Request $request, $id )
     {
-        return view('admin.form9.create','SecurityLeaving',$SecurityLeaving);
+        $SecurityLeaving= SecurityLeaving::find($id);
+        return view('admin.form9.create')->with('SecurityLeaving',$SecurityLeaving);
     }
 
     /**
@@ -69,9 +74,12 @@ class Form9Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form9UpdateRequest $request, $id)
     {
-        //
+        $SecurityLeaving= SecurityLeaving::find($id);
+        $SecurityLeaving->update($request->validated());
+
+        return redirect()->route('admin.form9.index');
     }
 
     /**

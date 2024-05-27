@@ -39,7 +39,7 @@
                             {!!Form::text('coupon', 'coupon / رقم البون')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('weigh_out', '  Weigh out')->readonly()!!}
+                            {!!Form::text('weigh_out', '  Weigh out','test')->readonly()!!}
                         </div>
 
                             @if(!isset($show))

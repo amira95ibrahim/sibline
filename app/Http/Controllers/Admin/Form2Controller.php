@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form2StoreRequest;
+use App\Http\Requests\Form2UpdateRequest;
 use App\DataTables\Admin\KioskCoordinatorDataTable;
 use App\Models\KioskCoordinator;
 use Illuminate\Http\Request;
@@ -35,7 +37,7 @@ class Form2Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form2StoreRequest $request)
     {
         $KioskCoordinator = KioskCoordinator::create($request->validated());
 
@@ -72,7 +74,7 @@ class Form2Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form2UpdateRequest $request, $id)
     {
         $KioskCoordinator= KioskCoordinator::find($id);
         $KioskCoordinator->update($request->validated());

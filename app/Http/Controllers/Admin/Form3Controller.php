@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Form3StoreRequest;
+use App\Http\Requests\Form3UpdateRequest;
 use App\DataTables\Admin\RMWeighbridgeINDataTable;
 use App\Models\RMWeighbridgeIN;
 use Illuminate\Http\Request;
@@ -35,9 +37,11 @@ class Form3Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form3StoreRequest $request)
     {
-        //
+        $RMWeighbridgeIN = RMWeighbridgeIN::create($request->validated());
+
+        return redirect()->route('admin.form3.index');
     }
 
     /**
@@ -57,8 +61,9 @@ class Form3Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,RMWeighbridgeIN $RMWeighbridgeIN)
+    public function edit(Request $request, $id)
     {
+        $RMWeighbridgeIN= RMWeighbridgeIN::find($id);
         return view('admin.form3.create')->with('RMWeighbridgeIN',$RMWeighbridgeIN);
     }
 
@@ -69,9 +74,12 @@ class Form3Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Form3UpdateRequest $request, $id)
     {
-        //
+        $RMWeighbridgeIN= RMWeighbridgeIN::find($id);
+        $RMWeighbridgeIN->update($request->validated());
+
+        return redirect()->route('admin.form3.index');
     }
 
     /**

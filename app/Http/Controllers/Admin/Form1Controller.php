@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CouponsGenerating;
+use App\Http\Requests\Form1StoreRequest;
+use App\Http\Requests\Form1UpdateRequest;
 use App\DataTables\Admin\CouponsGeneratingDataTable;
 use Illuminate\Http\Request;
 
@@ -35,9 +37,11 @@ class Form1Controller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Form1StoreRequest $request)
     {
-        //
+        $CouponsGenerating = CouponsGenerating::create($request->validated());
+
+        return redirect()->route('admin.form1.index');
     }
 
     /**
@@ -71,7 +75,7 @@ class Form1Controller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Form1UpdateRequest $request,  $id)
     {
         $CouponsGenerating= CouponsGenerating::find($id);
         $CouponsGenerating->update($request->validated());
