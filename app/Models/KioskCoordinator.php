@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class KioskCoordinator extends Model
 {
@@ -11,6 +12,7 @@ class KioskCoordinator extends Model
     protected $table="kiosk_coordinator";
     protected $fillable=[
         'id',
+        'user_id',
         'coupon',
         'purcashe_number',
         'contractor_number',
@@ -24,4 +26,8 @@ class KioskCoordinator extends Model
         'registeration_date_time',
         'storage_location'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

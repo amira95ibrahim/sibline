@@ -16,12 +16,13 @@
             <div class="d-flex my-xl-auto right-content">
 
               <div class="pr-1 mb-3 mb-xl-0">
-
+                @if(checkPermission('create'))
                     <a href="{{ url('admin/form9/create') }}" title="Add Security Leaving">
 
                         <button type="button" class="btn btn-primary"><i class="mdi mdi-plus"></i></button>
 
                     </a>
+                    @endif
 
                 </div>
 

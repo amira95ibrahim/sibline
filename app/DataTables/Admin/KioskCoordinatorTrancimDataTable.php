@@ -4,6 +4,7 @@ namespace App\DataTables\Admin;
 
 use App\Models\KioskCoordinatorTrancim;
 use Yajra\DataTables\Html\Button;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -21,13 +22,24 @@ class KioskCoordinatorTrancimDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('parent', function (KioskCoordinatorTrancim $coupon) {
-            //     return $coupon->parent? $coupon->parent->name : '';
-            // })
-            ->addColumn('action', '
-            <a href="'.url('admin/form5/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="delElement(\'form5/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
-            ');
+            ->editColumn('created_at', function (KioskCoordinatorTrancim $coupon) {
+                return Carbon::parse($coupon->created_at)->format('Y-m-d H:i:s');
+            })
+            ->addColumn('user_name', function (KioskCoordinatorTrancim $coupon) {
+                return $coupon->user ? $coupon->user->first_name : 'N/A';
+            })
+            ->addColumn('action', function ($KioskCoordinatorTrancim){
+
+                $actionUrls=' <a href="'.url('admin/form5/'.$KioskCoordinatorTrancim->id).'" class=""><i class="fas fa-eye"></i></a> ';
+
+                if(checkPermission('edit'))
+                    $actionUrls .= '<a href="'.url('admin/form5/'.$KioskCoordinatorTrancim->id.'/edit').'" class=""><i class="fas fa-edit"></i></a> ';
+
+                if(checkPermission('destroy'))
+                    $actionUrls .= '<a href="#" onclick="delElement(\'form5/'.$KioskCoordinatorTrancim->id.'\')" class=""><i class="fas fa-trash-alt"></i></a> ';
+
+                return $actionUrls;
+            });
     }
 
     /**
@@ -38,7 +50,7 @@ class KioskCoordinatorTrancimDataTable extends DataTable
      */
     public function query(KioskCoordinatorTrancim $model)
     {
-        return $model->newQuery()->orderBy('id','DESC');
+        return $model->newQuery() ->with('user')->orderBy('id','DESC');
     }
 
     /**
@@ -73,16 +85,19 @@ class KioskCoordinatorTrancimDataTable extends DataTable
         return [
 
 
+            Column::make('id'),
+            Column::make('user_name')->title('User Name'),
             Column::make('coupon'),
             Column::make('sales_order'),
             Column::make('customer_name'),
-            Column::make('customer_phone'),
+            // Column::make('customer_phone'),
             Column::make('destination'),
-            Column::make('material_name'),
+            // Column::make('material_name'),
             Column::make('Qty_loaded'),
-            Column::make('material_name'),
+            // Column::make('material_name'),
             Column::make('driver_name'),
             Column::make('truck_plate'),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

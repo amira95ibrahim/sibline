@@ -1,5 +1,5 @@
 @extends('admin.master')
-@section('title','Warehouse Coordinator')
+@section('title','Coupons Generating')
 @section('content')
         <div class="breadcrumb-header justify-content-between">
 
@@ -7,7 +7,7 @@
 
                 <div class="d-flex">
 
-                    <h4 class="content-title mb-0 my-auto">Warehouse coordinators</h4>
+                    <h4 class="content-title mb-0 my-auto">Coupons Generating</h4>
 
                 </div>
 
@@ -17,12 +17,13 @@
 
               <div class="pr-1 mb-3 mb-xl-0">
 
+                @if(checkPermission('create'))
                     <a href="{{ url('admin/form1/create') }}" title="Add Warehouse coordinator">
 
                         <button type="button" class="btn btn-primary"><i class="mdi mdi-plus"></i></button>
 
                     </a>
-
+                @endif
                 </div>
 
 

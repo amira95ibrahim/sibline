@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form4StoreRequest;
 use App\Http\Requests\Form4UpdateRequest;
 use App\DataTables\Admin\RMWeighbridgeOUTDataTable;
@@ -39,7 +40,14 @@ class Form4Controller extends Controller
      */
     public function store(Form4StoreRequest $request)
     {
-        $RMWeighbridgeOUT = RMWeighbridgeOUT::create($request->validated());
+        // Get the validated data
+        $data = $request->validated();
+
+        // Add the authenticated user's ID to the data
+        $data['user_id'] = Auth::id();
+
+        // Create the CouponsGenerating record with the modified data
+        RMWeighbridgeOUT::create($data);
 
         return redirect()->route('admin.form4.index');
     }
@@ -52,7 +60,8 @@ class Form4Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $RMWeighbridgeOUT= RMWeighbridgeOUT::find($id);
+        return view('admin.form4.create')->with(['RMWeighbridgeOUT' => $RMWeighbridgeOUT , 'show' => true]);
     }
 
     /**

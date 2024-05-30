@@ -82,7 +82,7 @@
 
 
     <script>
-   
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -101,7 +101,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        type:'DELETE',
+                        type:'POST',
                         url: link,
                         data:'_token = {{ csrf_token() }}',
                         success:function(data) {
@@ -166,7 +166,7 @@
     { orderable: true}
   ],
               order: [[3, 'desc']],
-              
+
 serverSide:false*/
             });
 
@@ -179,7 +179,7 @@ serverSide:false*/
 
     </script>
     <script>
-  
+
        function check_all(){
         $('input[class="item_checkbox"]:checkbox').each(function(){
             if($('input[class="check_all"]:checkbox:checked').length == 0){
@@ -346,10 +346,10 @@ serverSide:false*/
             }
             )
         }
-    
-            
-      
-            
-      
+
+
+
+
+
     </script>
     @stack('script')

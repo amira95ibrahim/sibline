@@ -35,25 +35,25 @@
                     @endif
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::select('purcashe_order', 'purcashe order / رقم طلب الشراء',[1 => '1' , 0 => '0'])->required()!!}
+                            {!!Form::select('purcashe_order', 'Purcashe Order / رقم طلب الشراء',[1 => '1' , 0 => '0'])->required()!!}
 
                         </div>
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('total_quantity', 'total quantity / الكمية','120')->readonly()!!}
+                            {!!Form::text('total_quantity', 'Total Quantity / الكمية','120')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_number', 'contractor number / رقم المتعهد','123456')->readonly()!!}
+                            {!!Form::text('contractor_number', 'Contractor Number / رقم المتعهد','123456')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_name', 'contractor name / اسم المتعهد','test')->readonly()!!}
+                            {!!Form::text('contractor_name', 'Contractor Name / اسم المتعهد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_num', 'material num / رقم المواد','55')->readonly()!!}
+                            {!!Form::text('material_num', 'Material num / رقم المواد','55')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_name', 'material name / اسم المواد','test')->readonly()!!}
+                            {!!Form::text('material_name', 'Material Name / اسم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
                             {!!Form::text('RM_source', 'RM_source / مصدر المواد الأولية')!!}
@@ -66,11 +66,13 @@
                         </div>
 
 
-
+                           
                             @if(!isset($show))
+
                             <div class="col-lg-12 col-xl-12-1 col-md-12 col-sm-12 d-inline-block">
                                 {!!Form::submit("Save")!!}
                             </div>
+
                             @endif
 
 

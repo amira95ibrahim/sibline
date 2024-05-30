@@ -3,6 +3,7 @@
 namespace App\DataTables\Admin;
 
 use App\Models\KioskCoordinator;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -21,13 +22,24 @@ class KioskCoordinatorDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('parent', function (KioskCoordinator $coupon) {
-            //     return $coupon->parent? $coupon->parent->name : '';
-            // })
-            ->addColumn('action', '
-            <a href="'.url('admin/form2/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="delElement(\'form2/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
-            ');
+            ->editColumn('created_at', function (KioskCoordinator $coupon) {
+                return Carbon::parse($coupon->created_at)->format('Y-m-d  H:i:s');
+            })
+            ->addColumn('user_name', function (KioskCoordinator $coupon) {
+                return $coupon->user ? $coupon->user->first_name : 'N/A';
+            })
+            ->addColumn('action', function ($KioskCoordinator){
+
+                $actionUrls=' <a href="'.url('admin/form2/'.$KioskCoordinator->id).'" class=""><i class="fas fa-eye"></i></a> ';
+
+                if(checkPermission('edit'))
+                    $actionUrls .= '<a href="'.url('admin/form2/'.$KioskCoordinator->id.'/edit').'" class=""><i class="fas fa-edit"></i></a> ';
+
+                if(checkPermission('destroy'))
+                    $actionUrls .= '<a href="#" onclick="delElement(\'form2/'.$KioskCoordinator->id.'\')" class=""><i class="fas fa-trash-alt"></i></a> ';
+
+                return $actionUrls;
+            });
     }
 
     /**
@@ -38,7 +50,7 @@ class KioskCoordinatorDataTable extends DataTable
      */
     public function query(KioskCoordinator $model)
     {
-        return $model->newQuery()->orderBy('id','DESC');
+        return $model->newQuery() ->with('user')->orderBy('id','DESC');
     }
 
     /**
@@ -72,11 +84,14 @@ class KioskCoordinatorDataTable extends DataTable
     {
         return [
 
+            Column::make('id'),
+            Column::make('user_name')->title('User Name'),
             Column::make('purcashe_number'),
             Column::make('material_name'),
             Column::make('RM_source'),
             Column::make('contractor_name'),
             Column::make('storage_location'),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

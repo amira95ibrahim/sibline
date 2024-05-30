@@ -16,6 +16,16 @@ Route::group(['prefix'=>'admin','middleware'=>['auth:admin','permission'],'as'=>
     Route::resource('form8', App\Http\Controllers\Admin\Form8Controller::class);
     Route::resource('form9', App\Http\Controllers\Admin\Form9Controller::class);
     Route::resource('form10', App\Http\Controllers\Admin\Form10Controller::class);
+    Route::post('form1/{id}', [ App\Http\Controllers\Admin\Form1Controller::class, 'Destroy']);
+    Route::post('form2/{id}', [ App\Http\Controllers\Admin\Form2Controller::class, 'Destroy']);
+    Route::post('form3/{id}', [ App\Http\Controllers\Admin\Form3Controller::class, 'Destroy']);
+    Route::post('form4/{id}', [ App\Http\Controllers\Admin\Form4Controller::class, 'Destroy']);
+    Route::post('form5/{id}', [ App\Http\Controllers\Admin\Form5Controller::class, 'Destroy']);
+    Route::post('form6/{id}', [ App\Http\Controllers\Admin\Form6Controller::class, 'Destroy']);
+    Route::post('form7/{id}', [ App\Http\Controllers\Admin\Form7Controller::class, 'Destroy']);
+    Route::post('form8/{id}', [ App\Http\Controllers\Admin\Form8Controller::class, 'Destroy']);
+    Route::post('form9/{id}', [ App\Http\Controllers\Admin\Form9Controller::class, 'Destroy']);
+    Route::post('form10/{id}', [ App\Http\Controllers\Admin\Form10Controller::class, 'Destroy']);
 
     Route::resource('role', App\Http\Controllers\Admin\RoleController::class);
 

@@ -5,6 +5,7 @@ namespace App\DataTables\Admin;
 use App\Models\SalesWeighbridgeOUT;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
@@ -21,13 +22,24 @@ class SalesWeighbridgeOUTDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('parent', function (SalesWeighbridgeOUT $coupon) {
-            //     return $coupon->parent? $coupon->parent->name : '';
-            // })
-            ->addColumn('action', '
-            <a href="'.url('admin/form7/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="delElement(\'form7/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
-            ');
+            ->editColumn('created_at', function (SalesWeighbridgeOUT $coupon) {
+                return Carbon::parse($coupon->created_at)->format('Y-m-d H:i:s');
+            })
+            ->addColumn('user_name', function (SalesWeighbridgeOUT $coupon) {
+                return $coupon->user ? $coupon->user->first_name : 'N/A';
+            })
+            ->addColumn('action', function ($SalesWeighbridgeOUT){
+
+                $actionUrls=' <a href="'.url('admin/form7/'.$SalesWeighbridgeOUT->id).'" class=""><i class="fas fa-eye"></i></a> ';
+
+                if(checkPermission('edit'))
+                    $actionUrls .= '<a href="'.url('admin/form7/'.$SalesWeighbridgeOUT->id.'/edit').'" class=""><i class="fas fa-edit"></i></a> ';
+
+                if(checkPermission('destroy'))
+                    $actionUrls .= '<a href="#" onclick="delElement(\'form7/'.$SalesWeighbridgeOUT->id.'\')" class=""><i class="fas fa-trash-alt"></i></a> ';
+
+                return $actionUrls;
+            });
     }
 
     /**
@@ -38,7 +50,7 @@ class SalesWeighbridgeOUTDataTable extends DataTable
      */
     public function query(SalesWeighbridgeOUT $model)
     {
-        return $model->newQuery()->orderBy('id','DESC');
+        return $model->newQuery() ->with('user')->orderBy('id','DESC');
     }
 
     /**
@@ -73,8 +85,10 @@ class SalesWeighbridgeOUTDataTable extends DataTable
         return [
 
             Column::make('id'),
+            Column::make('user_name')->title('User Name'),
             Column::make('coupon'),
             Column::make('weigh_out'),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

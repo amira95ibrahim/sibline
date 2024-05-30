@@ -5,6 +5,7 @@ namespace App\DataTables\Admin;
 use App\Models\CouponsGenerating;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
@@ -21,15 +22,24 @@ class CouponsGeneratingDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('parent', function (CouponsGenerating $coupon) {
-            //     return $coupon->parent? $coupon->parent->name : '';
-            // })
-            ->addColumn('action', '
+            ->addColumn('user_name', function (CouponsGenerating $coupon) {
+                return $coupon->user ? $coupon->user->first_name : 'N/A';
+            })
+            ->editColumn('created_at', function (CouponsGenerating $coupon) {
+                return Carbon::parse($coupon->created_at)->format('Y-m-d H:i:s');
+            })
+              ->addColumn('action', function ($CouponsGenerating){
 
-            <a href="'.url('admin/form1/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="delElement(\'form1/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
-            ');
-            // <a href="'.url('admin/form1/{{$id}}').'" class=""><i class="fas fa-eye"></i></a>
+                  $actionUrls=' <a href="'.url('admin/form1/'.$CouponsGenerating->id).'" class=""><i class="fas fa-eye"></i></a> ';
+
+                  if(checkPermission('edit'))
+                    $actionUrls.= '<a href="'.url('admin/form1/'.$CouponsGenerating->id.'/edit').'" class=""><i class="fas fa-edit"></i></a> ';
+
+                if(checkPermission('destroy'))
+                    $actionUrls .= '<a href="#" onclick="delElement(\'form1/'.$CouponsGenerating->id.'\')" class=""><i class="fas fa-trash-alt"></i></a> ';
+
+                return $actionUrls;
+            });
     }
 
     /**
@@ -40,7 +50,7 @@ class CouponsGeneratingDataTable extends DataTable
      */
     public function query(CouponsGenerating $model)
     {
-        return $model->newQuery()->orderBy('purchase_order','DESC');
+        return $model->newQuery() ->with('user')->orderBy('id','DESC');
     }
 
     /**
@@ -73,13 +83,14 @@ class CouponsGeneratingDataTable extends DataTable
     protected function getColumns()
     {
         return [
-
+            Column::make('id'),
+            Column::make('user_name')->title('User Name'),
             Column::make('purchase_order'),
             Column::make('total_quantity'),
             Column::make('RM_source'),
             Column::make('contractor_name'),
             Column::make('storage_location'),
-            // Column::make('parent'),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

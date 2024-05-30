@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form3StoreRequest;
 use App\Http\Requests\Form3UpdateRequest;
 use App\DataTables\Admin\RMWeighbridgeINDataTable;
@@ -39,7 +40,14 @@ class Form3Controller extends Controller
      */
     public function store(Form3StoreRequest $request)
     {
-        $RMWeighbridgeIN = RMWeighbridgeIN::create($request->validated());
+        // Get the validated data
+        $data = $request->validated();
+
+        // Add the authenticated user's ID to the data
+        $data['user_id'] = Auth::id();
+
+        // Create the CouponsGenerating record with the modified data
+        RMWeighbridgeIN::create($data);
 
         return redirect()->route('admin.form3.index');
     }
@@ -52,7 +60,8 @@ class Form3Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $RMWeighbridgeIN= RMWeighbridgeIN::find($id);
+        return view('admin.form3.create')->with(['RMWeighbridgeIN' => $RMWeighbridgeIN , 'show' => true]);
     }
 
     /**

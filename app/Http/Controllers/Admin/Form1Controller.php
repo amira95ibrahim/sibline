@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\CouponsGenerating;
 use App\Http\Requests\Form1StoreRequest;
 use App\Http\Requests\Form1UpdateRequest;
@@ -28,6 +29,7 @@ class Form1Controller extends Controller
      */
     public function create(Request $request)
     {
+
         return view('admin.form1.create');
     }
 
@@ -39,7 +41,14 @@ class Form1Controller extends Controller
      */
     public function store(Form1StoreRequest $request)
     {
-        $CouponsGenerating = CouponsGenerating::create($request->validated());
+         // Get the validated data
+         $data = $request->validated();
+
+         // Add the authenticated user's ID to the data
+         $data['user_id'] = Auth::id();
+
+         // Create the CouponsGenerating record with the modified data
+         CouponsGenerating::create($data);
 
         return redirect()->route('admin.form1.index');
     }
@@ -52,7 +61,8 @@ class Form1Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $CouponsGenerating= CouponsGenerating::find($id);
+        return view('admin.form1.create')->with(['CouponsGenerating' => $CouponsGenerating , 'show' => true]);
     }
 
     /**
@@ -65,8 +75,10 @@ class Form1Controller extends Controller
 
      public function edit(Request $request,$id)
      {
-        $CouponsGenerating= CouponsGenerating::find($id);
-         return view('admin.form1.create')->with('CouponsGenerating', $CouponsGenerating);
+         $CouponsGenerating= CouponsGenerating::find($id);
+
+            return view('admin.form1.create')->with('CouponsGenerating', $CouponsGenerating);
+
      }
     /**
      * Update the specified resource in storage.

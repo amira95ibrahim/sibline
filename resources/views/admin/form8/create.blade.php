@@ -35,10 +35,10 @@
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('coupon', 'coupon / رقم البون')!!}
+                            {!!Form::text('coupon', 'Coupon / رقم البون')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('arrival', '  arrival','test')->readonly()!!}
+                            {!!Form::text('arrival', '  Arrival','test')->readonly()!!}
                         </div>
                             @if(!isset($show))
                             <div class="col-lg-12 col-xl-12-1 col-md-12 col-sm-12 d-inline-block">

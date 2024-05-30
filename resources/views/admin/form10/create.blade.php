@@ -36,15 +36,15 @@
 
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::select('coupon', 'coupon / رقم  البون',[1 => '1' , 0 => '0'])->required()!!}
+                            {!!Form::select('coupon', 'Coupon / رقم  البون',[1 => '1' , 0 => '0'])->required()!!}
 
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('material_type', ' material type / نوع  المواد','test')->readonly()!!}
+                            {!!Form::text('material_type', ' Material Type / نوع  المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('storage_location', 'storage location /  مكان التفريغ-التخزين','test')->readonly()!!}
+                            {!!Form::text('storage_location', 'Storage Location /  مكان التفريغ-التخزين','test')->readonly()!!}
                         </div>
 
                             @if(!isset($show))

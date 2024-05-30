@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form8StoreRequest;
 use App\Http\Requests\Form8UpdateRequest;
 use App\DataTables\Admin\SecurityArrivalDataTable;
@@ -39,7 +40,14 @@ class Form8Controller extends Controller
      */
     public function store(Form8StoreRequest $request)
     {
-        $SecurityArrival = SecurityArrival::create($request->validated());
+        // Get the validated data
+        $data = $request->validated();
+
+        // Add the authenticated user's ID to the data
+        $data['user_id'] = Auth::id();
+
+        // Create the CouponsGenerating record with the modified data
+        SecurityArrival::create($data);
 
         return redirect()->route('admin.form8.index');
     }
@@ -52,7 +60,8 @@ class Form8Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $SecurityArrival= SecurityArrival::find($id);
+        return view('admin.form8.create')->with(['SecurityArrival' => $SecurityArrival , 'show' => true]);
     }
 
     /**

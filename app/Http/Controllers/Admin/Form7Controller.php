@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form7StoreRequest;
 use App\Http\Requests\Form7UpdateRequest;
 use App\DataTables\Admin\SalesWeighbridgeOUTDataTable;
@@ -39,7 +40,14 @@ class Form7Controller extends Controller
      */
     public function store(Form7StoreRequest $request)
     {
-        $SalesWeighbridgeOUT = SalesWeighbridgeOUT::create($request->validated());
+        // Get the validated data
+        $data = $request->validated();
+
+        // Add the authenticated user's ID to the data
+        $data['user_id'] = Auth::id();
+
+        // Create the CouponsGenerating record with the modified data
+        SalesWeighbridgeOUT::create($data);
 
         return redirect()->route('admin.form7.index');
     }
@@ -52,7 +60,8 @@ class Form7Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $SalesWeighbridgeOUT= SalesWeighbridgeOUT::find($id);
+        return view('admin.form7.create')->with(['SalesWeighbridgeOUT' => $SalesWeighbridgeOUT , 'show' => true]);
     }
 
     /**

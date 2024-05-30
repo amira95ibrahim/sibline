@@ -4,6 +4,7 @@ namespace App\DataTables\Admin;
 
 use App\Models\SecurityArrival;
 use Yajra\DataTables\Html\Button;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
@@ -21,13 +22,24 @@ class SecurityArrivalDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            // ->addColumn('parent', function (SecurityArrival $coupon) {
-            //     return $coupon->parent? $coupon->parent->name : '';
-            // })
-            ->addColumn('action', '
-            <a href="'.url('admin/form8/{{$id}}/edit').'" class=""><i class="fas fa-edit"></i></a>
-            <a href="#" onclick="delElement(\'form8/{{$id}}\')" class=""><i class="fas fa-trash-alt"></i></a>
-            ');
+            ->editColumn('created_at', function (SecurityArrival $coupon) {
+                return Carbon::parse($coupon->created_at)->format('Y-m-d H:i:s');
+            })
+            ->addColumn('user_name', function (SecurityArrival $coupon) {
+                return $coupon->user ? $coupon->user->first_name : 'N/A';
+            })
+            ->addColumn('action', function ($SecurityArrival){
+
+                $actionUrls=' <a href="'.url('admin/form8/'.$SecurityArrival->id).'" class=""><i class="fas fa-eye"></i></a> ';
+
+                if(checkPermission('edit'))
+                    $actionUrls .= '<a href="'.url('admin/form8/'.$SecurityArrival->id.'/edit').'" class=""><i class="fas fa-edit"></i></a> ';
+
+                if(checkPermission('destroy'))
+                    $actionUrls .= '<a href="#" onclick="delElement(\'form8/'.$SecurityArrival->id.'\')" class=""><i class="fas fa-trash-alt"></i></a> ';
+
+                return $actionUrls;
+            });
     }
 
     /**
@@ -38,7 +50,7 @@ class SecurityArrivalDataTable extends DataTable
      */
     public function query(SecurityArrival $model)
     {
-        return $model->newQuery()->orderBy('id','DESC');
+        return $model->newQuery() ->with('user')->orderBy('id','DESC');
     }
 
     /**
@@ -73,8 +85,10 @@ class SecurityArrivalDataTable extends DataTable
         return [
 
             Column::make('id'),
+            Column::make('user_name')->title('User Name'),
             Column::make('coupon'),
             Column::make('arrival'),
+            Column::make('created_at'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

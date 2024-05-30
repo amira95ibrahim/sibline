@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class CouponsGenerating extends Model
 {
@@ -11,6 +12,7 @@ class CouponsGenerating extends Model
     protected $table="coupons_generating";
     protected $fillable = [
         'id',
+        'user_id',
         'purchase_order',
         'total_quantity',
         'contractor_name',
@@ -23,4 +25,8 @@ class CouponsGenerating extends Model
 
 
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

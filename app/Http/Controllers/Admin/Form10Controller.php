@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form10StoreRequest;
 use App\Http\Requests\Form10UpdateRequest;
 use App\DataTables\Admin\QuarryCoordinatorDataTable;
@@ -39,7 +40,14 @@ class Form10Controller extends Controller
      */
     public function store(Form10StoreRequest $request)
     {
-        $QuarryCoordinator = QuarryCoordinator::create($request->validated());
+         // Get the validated data
+         $data = $request->validated();
+
+         // Add the authenticated user's ID to the data
+         $data['user_id'] = Auth::id();
+
+         // Create the CouponsGenerating record with the modified data
+         QuarryCoordinator::create($data);
 
         return redirect()->route('admin.form10.index');
     }
@@ -52,7 +60,8 @@ class Form10Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $QuarryCoordinator= QuarryCoordinator::find($id);
+        return view('admin.form10.create')->with(['QuarryCoordinator' => $QuarryCoordinator , 'show' => true]);
     }
 
     /**

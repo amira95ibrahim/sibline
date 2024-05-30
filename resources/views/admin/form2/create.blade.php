@@ -35,40 +35,40 @@
                     @endif
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
 
-                            {!!Form::text('coupon', 'coupon / رقم البون')!!}
+                            {!!Form::text('coupon', 'Coupon / رقم البون')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('purcashe_number', 'purcashe number / رقم طلب الشراء','test')->readonly()!!}
+                            {!!Form::text('purcashe_number', 'Purcashe Number / رقم طلب الشراء','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_number', 'contractor number / رقم  المتعهد','test')->readonly()!!}
+                            {!!Form::text('contractor_number', 'Contractor Number / رقم  المتعهد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('contractor_name', 'contractor name / اسم المتعهد','test')->readonly()!!}
+                            {!!Form::text('contractor_name', 'Contractor Name / اسم المتعهد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_num', 'material num / رقم المواد','test')->readonly()!!}
+                            {!!Form::text('material_num', 'Material Num / رقم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('material_name', 'material name / اسم المواد','test')->readonly()!!}
+                            {!!Form::text('material_name', 'Material Name / اسم المواد','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('RM_source', ' RM source / مصدر المواد الأولية','test')->readonly()!!}
+                            {!!Form::text('RM_source', ' RM Source / مصدر المواد الأولية','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('driver_name', 'driver name / اسم السائق')!!}
+                            {!!Form::text('driver_name', 'Driver Name / اسم السائق')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('driver_phone', 'driver number / رقم  هاتف السائق ')!!}
+                            {!!Form::text('driver_phone', 'Driver Number / رقم  هاتف السائق ')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('truck_plate', 'truck plate / رقم لوحة الشاحنة ')!!}
+                            {!!Form::text('truck_plate', 'Truck Plate / رقم لوحة الشاحنة ')!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('registeration_date_time', 'registeration date / وقت وتاريخ التسجيل','test')->readonly()!!}
+                            {!!Form::text('registeration_date_time', 'Registeration Date / وقت وتاريخ التسجيل','test')->readonly()!!}
                         </div>
                         <div class="col-lg-5 col-xl-5-1 col-md-12 col-sm-12 d-inline-block">
-                            {!!Form::text('storage_location', ' storage location / مكان التفريغ والتخزين ','test')->readonly()!!}
+                            {!!Form::text('torage_location', ' Storage Location / مكان التفريغ والتخزين ','test')->readonly()!!}
                         </div>
 
                             @if(!isset($show))

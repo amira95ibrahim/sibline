@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form2StoreRequest;
 use App\Http\Requests\Form2UpdateRequest;
 use App\DataTables\Admin\KioskCoordinatorDataTable;
@@ -39,7 +40,14 @@ class Form2Controller extends Controller
      */
     public function store(Form2StoreRequest $request)
     {
-        $KioskCoordinator = KioskCoordinator::create($request->validated());
+         // Get the validated data
+         $data = $request->validated();
+
+         // Add the authenticated user's ID to the data
+         $data['user_id'] = Auth::id();
+
+         // Create the CouponsGenerating record with the modified data
+         KioskCoordinator::create($data);
 
         return redirect()->route('admin.form2.index');
     }
@@ -52,7 +60,8 @@ class Form2Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $KioskCoordinator= KioskCoordinator::find($id);
+        return view('admin.form2.create')->with(['KioskCoordinator' => $KioskCoordinator , 'show' => true]);
     }
 
     /**

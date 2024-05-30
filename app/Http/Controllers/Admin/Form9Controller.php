@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Form9StoreRequest;
 use App\Http\Requests\Form9UpdateRequest;
 use App\DataTables\Admin\SecurityLeavingDataTable;
@@ -39,7 +40,14 @@ class Form9Controller extends Controller
      */
     public function store(Form9StoreRequest $request)
     {
-        $SecurityLeaving = SecurityLeaving::create($request->validated());
+        // Get the validated data
+        $data = $request->validated();
+
+        // Add the authenticated user's ID to the data
+        $data['user_id'] = Auth::id();
+
+        // Create the CouponsGenerating record with the modified data
+        SecurityLeaving::create($data);
 
         return redirect()->route('admin.form9.index');
     }
@@ -52,7 +60,8 @@ class Form9Controller extends Controller
      */
     public function show($id)
     {
-        //
+        $SecurityLeaving= SecurityLeaving::find($id);
+        return view('admin.form9.create')->with(['SecurityLeaving' => $SecurityLeaving , 'show' => true]);
     }
 
     /**

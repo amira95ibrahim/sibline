@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class KioskCoordinatorTrancim extends Model
 {
@@ -11,6 +12,7 @@ class KioskCoordinatorTrancim extends Model
     protected $table="kiosk_coordinator_trancium";
     protected $fillable=[
         'id',
+        'user_id',
         'coupon',
         'sales_order',
         'customer_phone',
@@ -25,4 +27,8 @@ class KioskCoordinatorTrancim extends Model
         'registeration_date_time',
         'truck_license'
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
